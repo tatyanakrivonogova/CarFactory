@@ -3,13 +3,13 @@ package view;
 import components.Body;
 import components.Engine;
 import dealers.Dealers;
+import suppliers.AccessoriesSuppliers;
 import suppliers.Supplier;
-import suppliers.Suppliers;
 
 import javax.swing.*;
 
 public class SliderSettingsPanel extends JPanel {
-    public SliderSettingsPanel(Supplier<Body> bodySupplier, Supplier<Engine> engineSupplier, Suppliers accessoriesSuppliers, Dealers dealers) {
+    public SliderSettingsPanel(Supplier<Body> bodySupplier, Supplier<Engine> engineSupplier, AccessoriesSuppliers accessoriesSuppliers, Dealers dealers) {
         super();
         JPanel bodySupplierPanel = new SupplierSliderPanel<>("Body supplier", bodySupplier);
         JPanel motorSupplierPanel = new SupplierSliderPanel<>("Engine supplier", engineSupplier);

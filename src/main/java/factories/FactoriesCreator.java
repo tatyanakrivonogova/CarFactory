@@ -1,9 +1,14 @@
 package factories;
 
 public class FactoriesCreator {
-    private final BodyFactory bodyFactory = new BodyFactory();
-    private final EngineFactory engineFactory = new EngineFactory();
-    private final AccessoriesFactory accessoriesFactory = new AccessoriesFactory();
+    private final BodyFactory bodyFactory;
+    private final EngineFactory engineFactory;
+    private final AccessoriesFactory accessoriesFactory;
+    public FactoriesCreator() {
+        bodyFactory = new BodyFactory();
+        engineFactory = new EngineFactory();
+        accessoriesFactory = new AccessoriesFactory();
+    }
 
     public BodyFactory getBodyFactory() {
         return bodyFactory;

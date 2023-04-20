@@ -2,9 +2,9 @@ package view;
 
 import components.Engine;
 import dealers.Dealers;
+import suppliers.AccessoriesSuppliers;
 import suppliers.Supplier;
 import components.Body;
-import suppliers.Suppliers;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ public class GUI extends JFrame {
     final int WINDOW_HEIGHT = 450;
     final int START_LOCATION = 180;
 
-    public GUI(Supplier<Body> bodySupplier, Supplier<Engine> engineSupplier, Suppliers accessoriesSuppliers, Dealers dealers) {
+    public GUI(Supplier<Body> bodySupplier, Supplier<Engine> engineSupplier, AccessoriesSuppliers accessoriesSuppliers, Dealers dealers) {
         super();
 
         setTitle("Car factory settings");

@@ -1,6 +1,7 @@
 package suppliers;
 
 import components.CarComponent;
+import controller.ComponentController;
 import factories.ComponentFactory;
 import storage.CarStorage;
 
@@ -10,11 +11,12 @@ public class Supplier<T extends CarComponent> {
     private final ComponentFactory<T> factory;
     private final CarStorage<T> storage;
     private int delay;
-
-    public Supplier(ComponentFactory<T> _factory, CarStorage<T> _storage, int _delay) {
+    ComponentController<T> controller;
+    public Supplier(ComponentFactory<T> _factory, CarStorage<T> _storage, int _delay, ComponentController<T> _controller) {
         factory = _factory;
         storage = _storage;
         delay = _delay;
+        controller = _controller;
     }
     public void setDelay(int newDelay) {
         delay = newDelay;
@@ -22,6 +24,7 @@ public class Supplier<T extends CarComponent> {
     public void work() {
         while (true) {
             storage.putComponent(factory.createComponent());
+            controller.update();
             try {
                 sleep(delay);
             } catch (InterruptedException e) {

@@ -1,12 +1,12 @@
 package view;
 
-import suppliers.Suppliers;
+import suppliers.AccessoriesSuppliers;
 
 import javax.swing.*;
 import java.util.Hashtable;
 
 public class AccessoriesSuppliersSliderPanel extends JPanel {
-    public AccessoriesSuppliersSliderPanel(Suppliers suppliers) {
+    public AccessoriesSuppliersSliderPanel(AccessoriesSuppliers suppliers) {
         super();
         JSlider slider = new JSlider(0, 30, 0);
         slider.setMajorTickSpacing(10);

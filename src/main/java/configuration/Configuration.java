@@ -7,6 +7,7 @@ import java.util.Properties;
 
 public class Configuration {
     private final String configFile;
+    private int startDelay;
     private int bodyStorageCapacity;
     private int engineStorageCapacity;
     private int accessoriesStorageCapacity;
@@ -25,6 +26,7 @@ public class Configuration {
         properties.load(input);
 
 
+        startDelay = Integer.parseInt(properties.getProperty("start_delay"));
         bodyStorageCapacity = Integer.parseInt(properties.getProperty("body_capacity"));
         engineStorageCapacity = Integer.parseInt(properties.getProperty("engine_capacity"));
         accessoriesStorageCapacity = Integer.parseInt(properties.getProperty("accessories_capacity"));
@@ -34,9 +36,9 @@ public class Configuration {
         dealersNumber = Integer.parseInt(properties.getProperty("dealers"));
         workersNumber = Integer.parseInt(properties.getProperty("workers"));
     }
-    public int getBodyStorageCapacity() {
-        return bodyStorageCapacity;
-    }
+
+    public int getStartDelay() { return startDelay; }
+    public int getBodyStorageCapacity() { return bodyStorageCapacity; }
     public int getEngineStorageCapacity() {
         return engineStorageCapacity;
     }
