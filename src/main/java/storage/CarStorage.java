@@ -2,34 +2,68 @@ package storage;
 
 import components.CarComponent;
 
-public class CarStorage<T extends CarComponent> implements Storage<T> {
-    @Override
-    public void putComponent(T component) {
+import java.util.LinkedList;
+import java.util.Queue;
 
+public class CarStorage<T extends CarComponent> implements Storage<T> {
+    private final int capacity;
+    private final Queue<T> componentQueue;
+    private int sizeUsed;
+
+    public CarStorage(int _capacity) {
+        capacity = _capacity;
+        componentQueue = new LinkedList<>();
+        sizeUsed = 0;
     }
 
     @Override
-    public T getComponent() {
-        return null;
+    public synchronized void putComponent(T component) {
+        if (isFull()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            componentQueue.add(component);
+            notify();
+            ++sizeUsed;
+        }
+    }
+
+    @Override
+    public synchronized T getComponent() {
+        while (isEmpty()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.err.println("Thread Interrupted");
+            }
+        }
+        T current = componentQueue.remove();
+        notify();
+        --sizeUsed;
+        return current;
     }
 
     @Override
     public int getCapacity() {
-        return 0;
+        return capacity;
     }
 
     @Override
-    public int getSize() {
-        return 0;
+    public int getSizeUsed() {
+        return sizeUsed;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return sizeUsed == 0;
     }
 
     @Override
     public boolean isFull() {
-        return false;
+        return sizeUsed == capacity;
     }
 }

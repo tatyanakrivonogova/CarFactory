@@ -1,3 +1,5 @@
+package inventorymanager;
+
 public class InventoryManager {
     private int index;
     public InventoryManager() {

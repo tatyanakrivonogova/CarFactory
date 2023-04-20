@@ -1,27 +1,25 @@
-package suppliers;
+package dealers;
 
-import components.CarComponent;
-import factories.ComponentFactory;
+import components.Car;
 import storage.CarStorage;
 
 import static java.lang.Thread.sleep;
 
-public class Supplier<T extends CarComponent> {
-    private final ComponentFactory<T> factory;
-    private final CarStorage<T> storage;
+public class Dealer {
+    private final CarStorage<Car> storage;
     private int delay;
 
-    public Supplier(ComponentFactory<T> _factory, CarStorage<T> _storage, int _delay) {
-        factory = _factory;
+    public Dealer(CarStorage<Car> _storage, int _delay) {
         storage = _storage;
         delay = _delay;
     }
+
     public void setDelay(int newDelay) {
         delay = newDelay;
     }
     public void work() {
         while (true) {
-            storage.putComponent(factory.createComponent());
+            storage.getComponent();
             try {
                 sleep(delay);
             } catch (InterruptedException e) {

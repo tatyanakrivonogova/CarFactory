@@ -1,2 +1,5 @@
-package components;public interface Component {
+package components;
+
+public interface Component {
+    public int getId();
 }
