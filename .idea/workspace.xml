@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d16b58c4-b9e3-4df2-8bde-e27b09a08c5d" name="Changes" comment="added subscriber-publisher for components controller">
+    <list default="true" id="d16b58c4-b9e3-4df2-8bde-e27b09a08c5d" name="Changes" comment="added communication between subscribers and publishers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dealers/Dealer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dealers/Dealer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dealers/Dealers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dealers/Dealers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/storage/CarStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/storage/CarStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/storage/CommonStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/storage/CommonStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/workers/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/workers/Worker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/workers/Workers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/workers/Workers.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +38,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_directory_selection": "D:/java/lab4/CarFactory/src/main/java/inventorymanager",
+    "last_opened_file_path": "D:/java/lab4/CarFactory/src/main",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
@@ -80,12 +73,20 @@
       <option name="project" value="LOCAL" />
       <updated>1682001130197</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added communication between subscribers and publishers">
+      <created>1682002564281</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682002564281</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added gui and a lot of new classes" />
     <MESSAGE value="added subscriber-publisher for components controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="added subscriber-publisher for components controller" />
+    <MESSAGE value="added communication between subscribers and publishers" />
+    <option name="LAST_COMMIT_MESSAGE" value="added communication between subscribers and publishers" />
   </component>
 </project>

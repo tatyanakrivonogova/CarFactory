@@ -13,7 +13,7 @@ import workers.Workers;
 import java.io.IOException;
 
 public class Main {
-    public static void main() {
+    public static void main(String[] args) {
         Configuration configuration;
         try {
             configuration = new Configuration("config.properties");
@@ -33,5 +33,6 @@ public class Main {
         Dealers dealers = new Dealers(configuration.getDealersNumber(), commonStorage, controller.getSoldCarController());
 
         GUI gui = new GUI(bodySupplier, engineSupplier, accessoriesSuppliers, dealers);
+        gui.setVisible(true);
     }
 }
