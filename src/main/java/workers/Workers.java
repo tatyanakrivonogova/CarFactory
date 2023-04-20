@@ -1,5 +1,7 @@
 package workers;
 
+import components.Car;
+import controller.ComponentController;
 import inventorymanager.InventoryManager;
 import storage.CommonStorage;
 
@@ -7,11 +9,11 @@ import java.util.ArrayList;
 
 public class Workers {
     private final ArrayList<Worker> workers;
-    public Workers(int numberOfWorkers, CommonStorage commonStorage) {
+    public Workers(int numberOfWorkers, CommonStorage commonStorage, ComponentController<Car> readyCarController) {
         workers = new ArrayList<>();
         InventoryManager carInventoryManager = new InventoryManager();
         for (int i = 0; i < numberOfWorkers;++i) {
-            workers.add(new Worker(carInventoryManager, commonStorage, 1000));
+            workers.add(new Worker(carInventoryManager, commonStorage, 1000, readyCarController));
         }
     }
     public void setDelay(int delay) {

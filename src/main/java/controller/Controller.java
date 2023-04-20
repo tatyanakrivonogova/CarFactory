@@ -11,17 +11,21 @@ public class Controller extends Publisher implements Subscriber {
     private final ComponentController<Body> bodyController;
     private final ComponentController<Engine> engineController;
     private final ComponentController<Accessories> accessoriesController;
-    private final ComponentController<Car> carController;
+    private final ComponentController<Car> readyCarController;
+    private final ComponentController<Car> soldCarController;
+
     public Controller() {
         bodyController = new ComponentController<>();
         engineController = new ComponentController<>();
         accessoriesController = new ComponentController<>();
-        carController = new ComponentController<>();
+        readyCarController = new ComponentController<>();
+        soldCarController = new ComponentController<>();
 
         bodyController.addSubscriber(this);
         engineController.addSubscriber(this);
         accessoriesController.addSubscriber(this);
-        carController.addSubscriber(this);
+        readyCarController.addSubscriber(this);
+        soldCarController.addSubscriber(this);
     }
 
     public ComponentController<Body> getBodyController() {
@@ -33,8 +37,11 @@ public class Controller extends Publisher implements Subscriber {
     public ComponentController<Accessories> getAccessoriesController() {
         return accessoriesController;
     }
-    public ComponentController<Car> getCarController() {
-        return carController;
+    public ComponentController<Car> getReadyCarController() {
+        return readyCarController;
+    }
+    public ComponentController<Car> getSoldCarController() {
+        return soldCarController;
     }
     @Override
     public void update() {

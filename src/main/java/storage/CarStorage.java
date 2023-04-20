@@ -1,11 +1,12 @@
 package storage;
 
 import components.CarComponent;
+import pubsub.Publisher;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class CarStorage<T extends CarComponent> implements Storage<T> {
+public class CarStorage<T extends CarComponent> extends Publisher implements Storage<T> {
     private final int capacity;
     private final Queue<T> componentQueue;
     private int sizeUsed;
@@ -27,6 +28,7 @@ public class CarStorage<T extends CarComponent> implements Storage<T> {
         } else {
             componentQueue.add(component);
             notify();
+            notifySubscribers();
             ++sizeUsed;
         }
     }

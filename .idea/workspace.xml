@@ -4,23 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d16b58c4-b9e3-4df2-8bde-e27b09a08c5d" name="Changes" comment="added gui and a lot of new classes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/ComponentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pubsub/Publisher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pubsub/Subscriber.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/workers/Worker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/workers/Workers.java" afterDir="false" />
+    <list default="true" id="d16b58c4-b9e3-4df2-8bde-e27b09a08c5d" name="Changes" comment="added subscriber-publisher for components controller">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/configuration/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/configuration/Configuration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/factories/FactoriesCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/factories/FactoriesCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/suppliers/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/suppliers/Supplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/suppliers/Suppliers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/suppliers/AccessoriesSuppliers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/AccessoriesSuppliersSliderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/AccessoriesSuppliersSliderPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/SliderSettingsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SliderSettingsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dealers/Dealer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dealers/Dealer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dealers/Dealers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dealers/Dealers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/storage/CarStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/storage/CarStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/storage/CommonStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/storage/CommonStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/workers/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/workers/Worker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/workers/Workers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/workers/Workers.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,8 +47,8 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_directory_selection": "D:/java/lab4/CarFactory/src/main/java/inventorymanager",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -80,11 +73,19 @@
       <option name="project" value="LOCAL" />
       <updated>1681994333525</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added subscriber-publisher for components controller">
+      <created>1682001130197</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682001130197</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added gui and a lot of new classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="added gui and a lot of new classes" />
+    <MESSAGE value="added subscriber-publisher for components controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="added subscriber-publisher for components controller" />
   </component>
 </project>

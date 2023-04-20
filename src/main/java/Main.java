@@ -29,8 +29,8 @@ public class Main {
         Supplier<Engine> engineSupplier = new Supplier<>(factoriesCreator.getEngineFactory(), commonStorage.getEngineStorage(), configuration.getStartDelay(), controller.getEngineController());
         AccessoriesSuppliers accessoriesSuppliers = new AccessoriesSuppliers(configuration.getSuppliersNumber(), commonStorage, factoriesCreator.getAccessoriesFactory(), controller.getAccessoriesController());
 
-        Workers workers = new Workers(configuration.getWorkersNumber(), commonStorage);
-        Dealers dealers = new Dealers(configuration.getDealersNumber(), commonStorage);
+        Workers workers = new Workers(configuration.getWorkersNumber(), commonStorage, controller.getReadyCarController());
+        Dealers dealers = new Dealers(configuration.getDealersNumber(), commonStorage, controller.getSoldCarController());
 
         GUI gui = new GUI(bodySupplier, engineSupplier, accessoriesSuppliers, dealers);
     }

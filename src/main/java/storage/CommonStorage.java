@@ -5,8 +5,10 @@ import components.Body;
 import components.Car;
 import components.Engine;
 import configuration.Configuration;
+import pubsub.Publisher;
+import pubsub.Subscriber;
 
-public class CommonStorage {
+public class CommonStorage extends Publisher implements Subscriber {
     private final CarStorage<Body> bodyStorage;
     private final CarStorage<Engine> engineStorage;
     private final CarStorage<Accessories> accessoriesStorage;
@@ -16,6 +18,11 @@ public class CommonStorage {
         engineStorage = new CarStorage<>(configuration.getEngineStorageCapacity());
         accessoriesStorage = new CarStorage<>(configuration.getAccessoriesStorageCapacity());
         carStorage = new CarStorage<>(configuration.getCarStorageCapacity());
+
+        bodyStorage.addSubscriber(this);
+        engineStorage.addSubscriber(this);
+        accessoriesStorage.addSubscriber(this);
+        carStorage.addSubscriber(this);
     }
     public CarStorage<Body> getBodyStorage() {
         return bodyStorage;
@@ -28,5 +35,10 @@ public class CommonStorage {
     }
     public CarStorage<Car> getCarStorage() {
         return carStorage;
+    }
+
+    @Override
+    public void update() {
+        notifySubscribers();
     }
 }
