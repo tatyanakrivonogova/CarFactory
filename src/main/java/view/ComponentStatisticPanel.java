@@ -17,8 +17,8 @@ public class ComponentStatisticPanel extends JPanel implements Subscriber {
     public ComponentStatisticPanel(String name, ComponentStorage<?> _storage, ComponentController<?> _controller) {
         super();
         this.name = name;
-        storageSize = new JLabel("|  " + name + " storage size: 0  |  ");
-        readyComponentsNumber = new JLabel(name + " ready components number: 0  |");
+        storageSize = new JLabel(name + " storage size: 0  ");
+        readyComponentsNumber = new JLabel(name + " ready components number: 0");
         storage = _storage;
         controller = _controller;
         this.add(storageSize);
@@ -28,7 +28,7 @@ public class ComponentStatisticPanel extends JPanel implements Subscriber {
     }
     @Override
     public void update() {
-        storageSize.setText("|  " + name + " storage size: " + storage.getSizeUsed() + "  |  ");
-        readyComponentsNumber.setText(name + " ready components number: " + controller.getComponentsNumber() + "  |");
+        storageSize.setText(name + " storage size: " + storage.getSizeUsed() + "  ");
+        readyComponentsNumber.setText(name + " ready components number: " + controller.getComponentsNumber());
     }
 }

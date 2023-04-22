@@ -5,6 +5,7 @@ import pubsub.Subscriber;
 import storage.CommonStorage;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class StatisticPanel extends JPanel implements Subscriber {
     private final ComponentStatisticPanel bodyStatisticPanel;
@@ -15,6 +16,7 @@ public class StatisticPanel extends JPanel implements Subscriber {
 
     public StatisticPanel(CommonStorage commonStorage, Controller controller) {
         super();
+        this.setLayout(new GridLayout(8, 0, 10, 10));
         bodyStatisticPanel = new ComponentStatisticPanel("Body", commonStorage.getBodyStorage(), controller.getBodyController());
         engineStatisticPanel = new ComponentStatisticPanel("Engine", commonStorage.getEngineStorage(), controller.getEngineController());
         accessoriesStatisticPanel = new ComponentStatisticPanel("Accessories", commonStorage.getAccessoriesStorage(), controller.getAccessoriesController());

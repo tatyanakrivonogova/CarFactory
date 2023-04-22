@@ -10,6 +10,7 @@ import java.util.HashSet;
 
 public class ThreadPool {
     private final Queue<Task> requestsQueue = new LinkedList<>();
+    Set<PooledThread> availableThreads;
 
     public void addRequest(Task request) {
         synchronized (requestsQueue) {
@@ -19,12 +20,16 @@ public class ThreadPool {
     }
 
     public ThreadPool(int numberOfThreads) {
-        Set<PooledThread> availableThreads = new HashSet<>();
+        availableThreads = new HashSet<>();
         for (int i = 0; i < numberOfThreads; ++i) {
             availableThreads.add(new PooledThread(requestsQueue));
         }
         for (PooledThread availableThread : availableThreads) {
             availableThread.start();
         }
+    }
+
+    public void shutdown() {
+        for (PooledThread t : availableThreads) t.interrupt();
     }
 }

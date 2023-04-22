@@ -10,9 +10,11 @@ import components.Body;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class GUI extends JFrame {
-    final int WINDOW_WIDTH = 400;
+    final int WINDOW_WIDTH = 500;
     final int WINDOW_HEIGHT = 500;
     final int START_LOCATION = 180;
 
@@ -20,13 +22,32 @@ public class GUI extends JFrame {
         super();
 
         setTitle("Car factory settings");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setBounds(START_LOCATION, START_LOCATION,
                 WINDOW_WIDTH, WINDOW_HEIGHT);
         setResizable(false);
         this.setFocusable(true);
         getContentPane().setBackground(Color.BLACK);
         getContentPane().setForeground(Color.BLACK);
+
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            public void windowClosing(WindowEvent event) {
+                for (Frame frame : getFrames()) frame.dispose();
+                dispose();
+            }
+            @Override
+            public void windowClosed(WindowEvent e) {}
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
 
         SliderSettingsPanel settingsPanel = new SliderSettingsPanel(bodySupplier, engineSupplier, accessoriesSuppliers, dealers);
 
@@ -35,10 +56,10 @@ public class GUI extends JFrame {
         controller.addSubscriber(statisticPanel);
 
 
-        //this.setLayout(new GridBagLayout());
-        this.setLayout(new GridLayout(5, 2, 20, 20));
-        getContentPane().add(settingsPanel);
+        GridLayout layout = new GridLayout(0, 2, 0, 20);
+        this.setLayout(layout);
         getContentPane().add(statisticPanel);
+        getContentPane().add(settingsPanel);
 
         pack();
         setVisible(true);

@@ -8,7 +8,7 @@ public class PooledThread extends Thread {
     private final Queue<Task> taskQueue;
 
     public PooledThread(Queue<Task> _requestsQueue) {
-        super();
+        super("it is my thread");
         taskQueue = _requestsQueue;
     }
     public void run() {

@@ -4,6 +4,7 @@ import configuration.Configuration;
 import controller.Controller;
 import dealers.Dealers;
 import factories.FactoriesCreator;
+import org.apache.log4j.Logger;
 import storage.CommonStorage;
 import suppliers.AccessoriesSuppliers;
 import suppliers.Supplier;
@@ -18,6 +19,7 @@ import workers.Workers;
 import java.io.IOException;
 
 public class Main {
+    private static final Logger logger = Logger.getLogger(Main.class);
     public static void main(String[] args) {
         Configuration configuration;
         try {
@@ -35,8 +37,10 @@ public class Main {
         AccessoriesSuppliers accessoriesSuppliers = new AccessoriesSuppliers(configuration.getSuppliersNumber(), commonStorage, factoriesCreator.getAccessoriesFactory(), controller.getAccessoriesController());
 
         Workers workers = new Workers(configuration.getWorkersNumber(), commonStorage, controller.getReadyCarController());
-        Dealers dealers = new Dealers(configuration.getDealersNumber(), commonStorage, controller.getSoldCarController());
+        Dealers dealers = new Dealers(configuration.getDealersNumber(), commonStorage, controller.getSoldCarController(), logger);
 
+        GUI gui = new GUI(commonStorage, controller, bodySupplier, engineSupplier, accessoriesSuppliers, dealers);
+        gui.setVisible(true);
 
         WorkersRequests workersRequests = new WorkersRequests(workers);
         ThreadPool workersPool = new ThreadPool(configuration.getWorkersNumber());
@@ -44,32 +48,14 @@ public class Main {
             workersPool.addRequest(request);
         }
 
-
-//        BodySupplierRequests bodySupplierRequests = new BodySupplierRequests(bodySupplier);
-//        BodySupplierThread bodySupplierThread = new BodySupplierThread(new LinkedList<>());
-//        for (int i = 0; i < 1; ++i) {
-//            for (Task request : bodySupplierRequests.getBodySupplierRequests()) {
-//                bodySupplierThread.addRequest(request);
-//            }
-//        }
-//
-//
-//        EngineSupplierRequests engineSupplierRequests = new EngineSupplierRequests(engineSupplier);
-//        EngineSupplierThread engineSupplierThread = new EngineSupplierThread(new LinkedList<>());
-//        for (int i = 0; i < 1; ++i) {
-//            for (Task request : engineSupplierRequests.getEngineSupplierRequests()) {
-//                engineSupplierThread.addRequest(request);
-//            }
-//        }
-
         BodySupplierRequests bodySupplierRequests = new BodySupplierRequests(bodySupplier);
-        ThreadPool bodySuppliersPool = new ThreadPool(2);
+        ThreadPool bodySuppliersPool = new ThreadPool(1);
         for (Task request : bodySupplierRequests.getBodySupplierRequests()) {
             bodySuppliersPool.addRequest(request);
         }
 
         EngineSupplierRequests engineSupplierRequests = new EngineSupplierRequests(engineSupplier);
-        ThreadPool engineSuppliersPool = new ThreadPool(2);
+        ThreadPool engineSuppliersPool = new ThreadPool(1);
         for (Task request : engineSupplierRequests.getEngineSupplierRequests()) {
             engineSuppliersPool.addRequest(request);
         }
@@ -86,8 +72,5 @@ public class Main {
         for (Task request : dealersRequests.getDealersRequests()) {
             dealersPool.addRequest(request);
         }
-
-        GUI gui = new GUI(commonStorage, controller, bodySupplier, engineSupplier, accessoriesSuppliers, dealers);
-        gui.setVisible(true);
     }
 }

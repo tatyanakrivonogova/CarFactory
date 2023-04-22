@@ -10,4 +10,14 @@ public class Car extends CarComponent {
         engine = _engine;
         accessories = _accessories;
     }
+
+    public Body getBody() {
+        return body;
+    }
+    public Engine getEngine() {
+        return engine;
+    }
+    public Accessories getAccessories() {
+        return accessories;
+    }
 }

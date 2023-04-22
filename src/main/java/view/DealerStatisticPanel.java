@@ -16,6 +16,6 @@ public class DealerStatisticPanel extends JPanel implements Subscriber {
     }
     @Override
     public void update() {
-        soldCarNumberLabel.setText("Cars sold: " + controller.getSoldCarsNumber() + "  |");
+        soldCarNumberLabel.setText("Cars sold: " + controller.getSoldCarsNumber());
     }
 }

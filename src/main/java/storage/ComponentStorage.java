@@ -25,7 +25,7 @@ public class ComponentStorage<T extends CarComponent> extends Publisher implemen
             try {
                 wait();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         } else {
             componentQueue.add(component);
@@ -44,7 +44,6 @@ public class ComponentStorage<T extends CarComponent> extends Publisher implemen
                 wait();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                System.err.println("Thread Interrupted");
             }
         }
         T current = componentQueue.remove();
