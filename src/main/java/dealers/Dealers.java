@@ -1,17 +1,16 @@
 package dealers;
 
-import components.Car;
-import controller.ComponentController;
+import controller.SoldCarController;
 import storage.CommonStorage;
 
 import java.util.ArrayList;
 
 public class Dealers {
     private final ArrayList<Dealer> dealers;
-    public Dealers(int numberOfDealers, CommonStorage commonStorage, ComponentController<Car> soldCarController) {
+    public Dealers(int numberOfDealers, CommonStorage commonStorage, SoldCarController soldCarController) {
         dealers = new ArrayList<>();
         for (int i = 0; i < numberOfDealers;++i) {
-            dealers.add(new Dealer(commonStorage.getCarStorage(), 1000, soldCarController));
+            dealers.add(new Dealer(commonStorage.getCarStorage(), 5000, soldCarController));
         }
     }
     public void setDelay(int delay) {

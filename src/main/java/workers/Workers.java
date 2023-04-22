@@ -13,13 +13,13 @@ public class Workers {
         workers = new ArrayList<>();
         InventoryManager carInventoryManager = new InventoryManager();
         for (int i = 0; i < numberOfWorkers;++i) {
-            workers.add(new Worker(carInventoryManager, commonStorage, 1000, readyCarController));
+            workers.add(new Worker(carInventoryManager, commonStorage, 5000, readyCarController));
         }
     }
     public void setDelay(int delay) {
         for (Worker w : workers) w.setDelay(delay);
     }
-    public ArrayList<Worker> getDealers() {
+    public ArrayList<Worker> getWorkers() {
         return workers;
     }
 }

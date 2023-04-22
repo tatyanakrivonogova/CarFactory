@@ -6,12 +6,14 @@ import pubsub.Publisher;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class CarStorage<T extends CarComponent> extends Publisher implements Storage<T> {
+public class ComponentStorage<T extends CarComponent> extends Publisher implements Storage<T> {
+    String name;
     private final int capacity;
     private final Queue<T> componentQueue;
     private int sizeUsed;
 
-    public CarStorage(int _capacity) {
+    public ComponentStorage(String _name, int _capacity) {
+        name = _name;
         capacity = _capacity;
         componentQueue = new LinkedList<>();
         sizeUsed = 0;
@@ -27,9 +29,11 @@ public class CarStorage<T extends CarComponent> extends Publisher implements Sto
             }
         } else {
             componentQueue.add(component);
+            ++sizeUsed;
+            System.out.println(name + " storage++");
+            System.out.println(sizeUsed);
             notify();
             notifySubscribers();
-            ++sizeUsed;
         }
     }
 
@@ -45,7 +49,9 @@ public class CarStorage<T extends CarComponent> extends Publisher implements Sto
         }
         T current = componentQueue.remove();
         notify();
+        notifySubscribers();
         --sizeUsed;
+        System.out.println(name + " storage--");
         return current;
     }
 

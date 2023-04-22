@@ -12,7 +12,7 @@ public class AccessoriesSuppliers {
     public AccessoriesSuppliers(int numberOfSuppliers, CommonStorage commonStorage, AccessoriesFactory accessoriesFactory, ComponentController<Accessories> _controller) {
         suppliers = new ArrayList<>();
         for (int i = 0; i < numberOfSuppliers;++i) {
-            suppliers.add(new Supplier(accessoriesFactory, commonStorage.getAccessoriesStorage(), 1000, _controller));
+            suppliers.add(new Supplier(accessoriesFactory, commonStorage.getAccessoriesStorage(), 5000, _controller));
         }
     }
     public void setDelay(int delay) {

@@ -6,17 +6,18 @@ import components.Car;
 import components.Engine;
 import controller.ComponentController;
 import inventorymanager.InventoryManager;
-import storage.CarStorage;
 import storage.CommonStorage;
+import storage.ComponentStorage;
+import threads.Task;
 
 import static java.lang.Thread.sleep;
 
-public class Worker {
+public class Worker implements Task {
     InventoryManager carInventoryManager;
-    private final CarStorage<Car> carStorage;
-    private final CarStorage<Body> bodyStorage;
-    private final CarStorage<Engine> engineStorage;
-    private final CarStorage<Accessories> accessoriesStorage;
+    private final ComponentStorage<Car> carStorage;
+    private final ComponentStorage<Body> bodyStorage;
+    private final ComponentStorage<Engine> engineStorage;
+    private final ComponentStorage<Accessories> accessoriesStorage;
     private int delay;
     private final ComponentController<Car> readyCarController;
 
@@ -39,6 +40,7 @@ public class Worker {
             Engine engine = engineStorage.getComponent();
             Accessories accessories = accessoriesStorage.getComponent();
             Car car = new Car(carInventoryManager.giveId(), body, engine, accessories);
+            carStorage.putComponent(car);
             readyCarController.update();
             try {
                 sleep(delay);

@@ -1,17 +1,18 @@
 package dealers;
 
 import components.Car;
-import controller.ComponentController;
-import storage.CarStorage;
+import controller.SoldCarController;
+import storage.ComponentStorage;
+import threads.Task;
 
 import static java.lang.Thread.sleep;
 
-public class Dealer {
-    private final CarStorage<Car> storage;
+public class Dealer implements Task {
+    private final ComponentStorage<Car> storage;
     private int delay;
-    ComponentController<Car> soldCarController;
+    SoldCarController soldCarController;
 
-    public Dealer(CarStorage<Car> _storage, int _delay, ComponentController<Car> _soldCarController) {
+    public Dealer(ComponentStorage<Car> _storage, int _delay, SoldCarController _soldCarController) {
         storage = _storage;
         delay = _delay;
         soldCarController = _soldCarController;
@@ -23,6 +24,7 @@ public class Dealer {
     public void work() {
         while (true) {
             storage.getComponent();
+            System.out.println("dealer");
             soldCarController.update();
             try {
                 sleep(delay);

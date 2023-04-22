@@ -12,14 +12,14 @@ public class Controller extends Publisher implements Subscriber {
     private final ComponentController<Engine> engineController;
     private final ComponentController<Accessories> accessoriesController;
     private final ComponentController<Car> readyCarController;
-    private final ComponentController<Car> soldCarController;
+    private final SoldCarController soldCarController;
 
     public Controller() {
         bodyController = new ComponentController<>();
         engineController = new ComponentController<>();
         accessoriesController = new ComponentController<>();
         readyCarController = new ComponentController<>();
-        soldCarController = new ComponentController<>();
+        soldCarController = new SoldCarController();
 
         bodyController.addSubscriber(this);
         engineController.addSubscriber(this);
@@ -40,7 +40,7 @@ public class Controller extends Publisher implements Subscriber {
     public ComponentController<Car> getReadyCarController() {
         return readyCarController;
     }
-    public ComponentController<Car> getSoldCarController() {
+    public SoldCarController getSoldCarController() {
         return soldCarController;
     }
     @Override

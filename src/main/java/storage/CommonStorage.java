@@ -9,31 +9,31 @@ import pubsub.Publisher;
 import pubsub.Subscriber;
 
 public class CommonStorage extends Publisher implements Subscriber {
-    private final CarStorage<Body> bodyStorage;
-    private final CarStorage<Engine> engineStorage;
-    private final CarStorage<Accessories> accessoriesStorage;
-    private final CarStorage<Car> carStorage;
+    private final ComponentStorage<Body> bodyStorage;
+    private final ComponentStorage<Engine> engineStorage;
+    private final ComponentStorage<Accessories> accessoriesStorage;
+    private final ComponentStorage<Car> carStorage;
     public CommonStorage(Configuration configuration) {
-        bodyStorage = new CarStorage<>(configuration.getBodyStorageCapacity());
-        engineStorage = new CarStorage<>(configuration.getEngineStorageCapacity());
-        accessoriesStorage = new CarStorage<>(configuration.getAccessoriesStorageCapacity());
-        carStorage = new CarStorage<>(configuration.getCarStorageCapacity());
+        bodyStorage = new ComponentStorage<>("body", configuration.getBodyStorageCapacity());
+        engineStorage = new ComponentStorage<>("engine", configuration.getEngineStorageCapacity());
+        accessoriesStorage = new ComponentStorage<>("accessories", configuration.getAccessoriesStorageCapacity());
+        carStorage = new ComponentStorage<>("car", configuration.getCarStorageCapacity());
 
         bodyStorage.addSubscriber(this);
         engineStorage.addSubscriber(this);
         accessoriesStorage.addSubscriber(this);
         carStorage.addSubscriber(this);
     }
-    public CarStorage<Body> getBodyStorage() {
+    public ComponentStorage<Body> getBodyStorage() {
         return bodyStorage;
     }
-    public CarStorage<Engine> getEngineStorage() {
+    public ComponentStorage<Engine> getEngineStorage() {
         return engineStorage;
     }
-    public CarStorage<Accessories> getAccessoriesStorage() {
+    public ComponentStorage<Accessories> getAccessoriesStorage() {
         return accessoriesStorage;
     }
-    public CarStorage<Car> getCarStorage() {
+    public ComponentStorage<Car> getCarStorage() {
         return carStorage;
     }
 
