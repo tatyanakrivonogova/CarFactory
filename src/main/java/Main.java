@@ -39,38 +39,42 @@ public class Main {
         Workers workers = new Workers(configuration.getWorkersNumber(), commonStorage, controller.getReadyCarController());
         Dealers dealers = new Dealers(configuration.getDealersNumber(), commonStorage, controller.getSoldCarController(), logger);
 
-        GUI gui = new GUI(commonStorage, controller, bodySupplier, engineSupplier, accessoriesSuppliers, dealers);
+        ThreadsController threadsController = new ThreadsController();
+
+        GUI gui = new GUI(commonStorage, controller, bodySupplier, engineSupplier, accessoriesSuppliers, dealers, threadsController);
         gui.setVisible(true);
 
         WorkersRequests workersRequests = new WorkersRequests(workers);
-        ThreadPool workersPool = new ThreadPool(configuration.getWorkersNumber());
+        ThreadPool workersPool = new ThreadPool("workers", configuration.getWorkersNumber());
         for (Task request : workersRequests.getWorkersRequests()) {
             workersPool.addRequest(request);
         }
 
         BodySupplierRequests bodySupplierRequests = new BodySupplierRequests(bodySupplier);
-        ThreadPool bodySuppliersPool = new ThreadPool(1);
+        ThreadPool bodySuppliersPool = new ThreadPool("body supplier", 1);
         for (Task request : bodySupplierRequests.getBodySupplierRequests()) {
             bodySuppliersPool.addRequest(request);
         }
 
         EngineSupplierRequests engineSupplierRequests = new EngineSupplierRequests(engineSupplier);
-        ThreadPool engineSuppliersPool = new ThreadPool(1);
+        ThreadPool engineSuppliersPool = new ThreadPool("engine supplier", 1);
         for (Task request : engineSupplierRequests.getEngineSupplierRequests()) {
             engineSuppliersPool.addRequest(request);
         }
 
 
         AccessoriesSuppliersRequests accessoriesSuppliersRequests = new AccessoriesSuppliersRequests(accessoriesSuppliers);
-        ThreadPool accessoriesSuppliersPool = new ThreadPool(configuration.getSuppliersNumber());
+        ThreadPool accessoriesSuppliersPool = new ThreadPool("accessories supplier", configuration.getSuppliersNumber());
         for (Task request : accessoriesSuppliersRequests.getAccessoriesSuppliersRequests()) {
             accessoriesSuppliersPool.addRequest(request);
         }
 
         DealersRequests dealersRequests = new DealersRequests(dealers);
-        ThreadPool dealersPool = new ThreadPool(configuration.getDealersNumber());
+        ThreadPool dealersPool = new ThreadPool("dealers", configuration.getDealersNumber());
         for (Task request : dealersRequests.getDealersRequests()) {
             dealersPool.addRequest(request);
         }
+
+        threadsController.setPools(workersPool, bodySuppliersPool, engineSuppliersPool, accessoriesSuppliersPool, dealersPool);
     }
 }

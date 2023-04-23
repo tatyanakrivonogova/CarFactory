@@ -7,20 +7,21 @@ import java.util.Queue;
 public class PooledThread extends Thread {
     private final Queue<Task> taskQueue;
 
-    public PooledThread(Queue<Task> _requestsQueue) {
-        super("it is my thread");
+    public PooledThread(String name, Queue<Task> _requestsQueue) {
+        super(name);
         taskQueue = _requestsQueue;
     }
     public void run() {
         Task runningTask = null;
-        while (true) {
+        while (!currentThread().isInterrupted()) {
             synchronized (taskQueue) {
                 if (taskQueue.isEmpty()) {
                     try {
                         taskQueue.wait();
                     }
                     catch (InterruptedException e) {
-                        System.out.println("interrupted");
+                        System.out.println("----------------------------------------------");
+                        Thread.currentThread().interrupt();
                     }
                 }
                 else {

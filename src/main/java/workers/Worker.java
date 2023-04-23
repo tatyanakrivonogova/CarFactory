@@ -10,6 +10,7 @@ import storage.CommonStorage;
 import storage.ComponentStorage;
 import threads.Task;
 
+import static java.lang.Thread.currentThread;
 import static java.lang.Thread.sleep;
 
 public class Worker implements Task {
@@ -35,7 +36,7 @@ public class Worker implements Task {
         delay = newDelay;
     }
     public void work() {
-        while (true) {
+        while (!currentThread().isInterrupted()) {
             Body body = bodyStorage.getComponent();
             Engine engine = engineStorage.getComponent();
             Accessories accessories = accessoriesStorage.getComponent();

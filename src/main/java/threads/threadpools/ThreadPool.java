@@ -1,6 +1,5 @@
 package threads.threadpools;
 
-
 import threads.Task;
 
 import java.util.LinkedList;
@@ -19,10 +18,10 @@ public class ThreadPool {
         }
     }
 
-    public ThreadPool(int numberOfThreads) {
+    public ThreadPool(String name, int numberOfThreads) {
         availableThreads = new HashSet<>();
         for (int i = 0; i < numberOfThreads; ++i) {
-            availableThreads.add(new PooledThread(requestsQueue));
+            availableThreads.add(new PooledThread(name, requestsQueue));
         }
         for (PooledThread availableThread : availableThreads) {
             availableThread.start();
@@ -30,6 +29,8 @@ public class ThreadPool {
     }
 
     public void shutdown() {
-        for (PooledThread t : availableThreads) t.interrupt();
+        for (PooledThread t : availableThreads) {
+            t.interrupt();
+        }
     }
 }

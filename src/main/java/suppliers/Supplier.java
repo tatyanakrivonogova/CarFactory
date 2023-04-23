@@ -6,6 +6,7 @@ import factories.ComponentFactory;
 import storage.ComponentStorage;
 import threads.Task;
 
+import static java.lang.Thread.currentThread;
 import static java.lang.Thread.sleep;
 
 public class Supplier<T extends CarComponent> implements Task {
@@ -23,7 +24,7 @@ public class Supplier<T extends CarComponent> implements Task {
         delay = newDelay;
     }
     public void work() {
-        while (true) {
+        while (!currentThread().isInterrupted()) {
             storage.putComponent(factory.createComponent());
             controller.update();
             try {

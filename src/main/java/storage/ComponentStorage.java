@@ -39,19 +39,23 @@ public class ComponentStorage<T extends CarComponent> extends Publisher implemen
 
     @Override
     public synchronized T getComponent() {
-        while (isEmpty()) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+        while (!Thread.currentThread().isInterrupted()) {
+            if (!isEmpty()) {
+                T current = componentQueue.remove();
+                notify();
+                notifySubscribers();
+                --sizeUsed;
+                System.out.println(name + " storage--");
+                return current;
+            } else {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
             }
         }
-        T current = componentQueue.remove();
-        notify();
-        notifySubscribers();
-        --sizeUsed;
-        System.out.println(name + " storage--");
-        return current;
+        return null;
     }
 
     @Override

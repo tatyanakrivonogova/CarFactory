@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import storage.ComponentStorage;
 import threads.Task;
 
+import static java.lang.Thread.currentThread;
 import static java.lang.Thread.sleep;
 
 public class Dealer implements Task {
@@ -28,8 +29,9 @@ public class Dealer implements Task {
         delay = newDelay;
     }
     public void work() {
-        while (true) {
+        while (!currentThread().isInterrupted()) {
             Car car = storage.getComponent();
+            if (car == null) return;
             soldCarController.update();
             logger.log(Level.INFO, "Dealer : " + id + " Auto : " + car.getId() + " (Body : " +
                     car.getBody().getId() + " , Engine : " + car.getEngine().getId() + " , Accessories : " +

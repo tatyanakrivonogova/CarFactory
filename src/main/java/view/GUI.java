@@ -7,6 +7,7 @@ import storage.CommonStorage;
 import suppliers.AccessoriesSuppliers;
 import suppliers.Supplier;
 import components.Body;
+import threads.ThreadsController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,9 +18,12 @@ public class GUI extends JFrame {
     final int WINDOW_WIDTH = 500;
     final int WINDOW_HEIGHT = 500;
     final int START_LOCATION = 180;
+    ThreadsController threadsController;
 
-    public GUI(CommonStorage commonStorage, Controller controller, Supplier<Body> bodySupplier, Supplier<Engine> engineSupplier, AccessoriesSuppliers accessoriesSuppliers, Dealers dealers) {
+    public GUI(CommonStorage commonStorage, Controller controller, Supplier<Body> bodySupplier, Supplier<Engine> engineSupplier,
+               AccessoriesSuppliers accessoriesSuppliers, Dealers dealers, ThreadsController _threadsController) {
         super();
+        threadsController = _threadsController;
 
         setTitle("Car factory settings");
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -36,6 +40,7 @@ public class GUI extends JFrame {
             public void windowClosing(WindowEvent event) {
                 for (Frame frame : getFrames()) frame.dispose();
                 dispose();
+                threadsController.stopPools();
             }
             @Override
             public void windowClosed(WindowEvent e) {}
