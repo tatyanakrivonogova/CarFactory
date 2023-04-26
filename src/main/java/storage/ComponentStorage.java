@@ -21,19 +21,22 @@ public class ComponentStorage<T extends CarComponent> extends Publisher implemen
 
     @Override
     public synchronized void putComponent(T component) {
-        if (isFull()) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+        while (!Thread.currentThread().isInterrupted()) {
+            if (isFull()) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            } else {
+                componentQueue.add(component);
+                ++sizeUsed;
+                System.out.println(name + " storage++");
+                System.out.println(sizeUsed);
+                notify();
+                notifySubscribers();
+                break;
             }
-        } else {
-            componentQueue.add(component);
-            ++sizeUsed;
-            System.out.println(name + " storage++");
-            System.out.println(sizeUsed);
-            notify();
-            notifySubscribers();
         }
     }
 

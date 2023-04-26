@@ -8,6 +8,7 @@ import suppliers.AccessoriesSuppliers;
 import suppliers.Supplier;
 import components.Body;
 import threads.ThreadsController;
+import workers.Workers;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +22,7 @@ public class GUI extends JFrame {
     ThreadsController threadsController;
 
     public GUI(CommonStorage commonStorage, Controller controller, Supplier<Body> bodySupplier, Supplier<Engine> engineSupplier,
-               AccessoriesSuppliers accessoriesSuppliers, Dealers dealers, ThreadsController _threadsController) {
+               AccessoriesSuppliers accessoriesSuppliers, Dealers dealers, Workers workers, ThreadsController _threadsController, int startDelay) {
         super();
         threadsController = _threadsController;
 
@@ -54,7 +55,7 @@ public class GUI extends JFrame {
             public void windowDeactivated(WindowEvent e) {}
         });
 
-        SliderSettingsPanel settingsPanel = new SliderSettingsPanel(bodySupplier, engineSupplier, accessoriesSuppliers, dealers);
+        SliderSettingsPanel settingsPanel = new SliderSettingsPanel(bodySupplier, engineSupplier, accessoriesSuppliers, dealers, workers, startDelay);
 
         StatisticPanel statisticPanel = new StatisticPanel(commonStorage, controller);
         commonStorage.addSubscriber(statisticPanel);

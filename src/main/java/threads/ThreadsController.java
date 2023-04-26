@@ -1,11 +1,15 @@
 package threads;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import threads.threadpools.ThreadPool;
 
 import java.util.ArrayList;
 
 public class ThreadsController {
     ArrayList<ThreadPool> pools;
+    Logger logger;
+    public ThreadsController(Logger _logger) { logger = _logger; }
 
     public void setPools(ThreadPool workersPool, ThreadPool bodySuppliersPool, ThreadPool engineSuppliersPool,
                          ThreadPool accessoriesSuppliersPool, ThreadPool dealersPool) {
@@ -21,5 +25,6 @@ public class ThreadsController {
         for (ThreadPool t : pools) {
             t.shutdown();
         }
+        logger.log(Level.INFO, "Production is finished");
     }
 }

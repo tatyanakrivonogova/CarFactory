@@ -43,9 +43,9 @@ public class Main {
         Workers workers = new Workers(configuration.getWorkersNumber(), configuration.getStartDelay(), commonStorage, controller.getReadyCarController());
         Dealers dealers = new Dealers(configuration.getDealersNumber(), configuration.getStartDelay(), commonStorage, controller.getSoldCarController(), logger);
 
-        ThreadsController threadsController = new ThreadsController();
+        ThreadsController threadsController = new ThreadsController(logger);
 
-        GUI gui = new GUI(commonStorage, controller, bodySupplier, engineSupplier, accessoriesSuppliers, dealers, threadsController);
+        GUI gui = new GUI(commonStorage, controller, bodySupplier, engineSupplier, accessoriesSuppliers, dealers, workers, threadsController, configuration.getStartDelay());
         gui.setVisible(true);
 
         WorkersRequests workersRequests = new WorkersRequests(workers);
