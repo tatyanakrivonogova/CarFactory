@@ -4,6 +4,7 @@ import configuration.Configuration;
 import controller.Controller;
 import dealers.Dealers;
 import factories.FactoriesCreator;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import storage.CommonStorage;
 import suppliers.AccessoriesSuppliers;
@@ -28,16 +29,19 @@ public class Main {
             System.err.println(e.getMessage());
             return;
         }
+
+        if (!configuration.getLogStatus()) logger.setLevel(Level.OFF);
+        logger.log(Level.INFO, "Start of new production");
         FactoriesCreator factoriesCreator = new FactoriesCreator();
         CommonStorage commonStorage = new CommonStorage(configuration);
         Controller controller = new Controller();
 
-        Supplier<Body> bodySupplier = new Supplier<>(factoriesCreator.getBodyFactory(), commonStorage.getBodyStorage(), 5000, controller.getBodyController());
-        Supplier<Engine> engineSupplier = new Supplier<>(factoriesCreator.getEngineFactory(), commonStorage.getEngineStorage(), 5000, controller.getEngineController());
-        AccessoriesSuppliers accessoriesSuppliers = new AccessoriesSuppliers(configuration.getSuppliersNumber(), commonStorage, factoriesCreator.getAccessoriesFactory(), controller.getAccessoriesController());
+        Supplier<Body> bodySupplier = new Supplier<>(factoriesCreator.getBodyFactory(), commonStorage.getBodyStorage(), configuration.getStartDelay(), controller.getBodyController());
+        Supplier<Engine> engineSupplier = new Supplier<>(factoriesCreator.getEngineFactory(), commonStorage.getEngineStorage(), configuration.getStartDelay(), controller.getEngineController());
+        AccessoriesSuppliers accessoriesSuppliers = new AccessoriesSuppliers(configuration.getSuppliersNumber(), configuration.getStartDelay(), commonStorage, factoriesCreator.getAccessoriesFactory(), controller.getAccessoriesController());
 
-        Workers workers = new Workers(configuration.getWorkersNumber(), commonStorage, controller.getReadyCarController());
-        Dealers dealers = new Dealers(configuration.getDealersNumber(), commonStorage, controller.getSoldCarController(), logger);
+        Workers workers = new Workers(configuration.getWorkersNumber(), configuration.getStartDelay(), commonStorage, controller.getReadyCarController());
+        Dealers dealers = new Dealers(configuration.getDealersNumber(), configuration.getStartDelay(), commonStorage, controller.getSoldCarController(), logger);
 
         ThreadsController threadsController = new ThreadsController();
 
@@ -45,7 +49,7 @@ public class Main {
         gui.setVisible(true);
 
         WorkersRequests workersRequests = new WorkersRequests(workers);
-        ThreadPool workersPool = new ThreadPool("workers", configuration.getWorkersNumber());
+        ThreadPool workersPool = new ThreadPool("worker", configuration.getWorkersNumber());
         for (Task request : workersRequests.getWorkersRequests()) {
             workersPool.addRequest(request);
         }
@@ -70,7 +74,7 @@ public class Main {
         }
 
         DealersRequests dealersRequests = new DealersRequests(dealers);
-        ThreadPool dealersPool = new ThreadPool("dealers", configuration.getDealersNumber());
+        ThreadPool dealersPool = new ThreadPool("dealer", configuration.getDealersNumber());
         for (Task request : dealersRequests.getDealersRequests()) {
             dealersPool.addRequest(request);
         }

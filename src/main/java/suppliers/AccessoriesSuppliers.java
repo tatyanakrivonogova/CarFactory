@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class AccessoriesSuppliers {
     private final ArrayList<Supplier> suppliers;
-    public AccessoriesSuppliers(int numberOfSuppliers, CommonStorage commonStorage, AccessoriesFactory accessoriesFactory, ComponentController<Accessories> _controller) {
+    public AccessoriesSuppliers(int numberOfSuppliers, int startDelay, CommonStorage commonStorage, AccessoriesFactory accessoriesFactory, ComponentController<Accessories> _controller) {
         suppliers = new ArrayList<>();
         for (int i = 0; i < numberOfSuppliers;++i) {
-            suppliers.add(new Supplier(accessoriesFactory, commonStorage.getAccessoriesStorage(), 5000, _controller));
+            suppliers.add(new Supplier(accessoriesFactory, commonStorage.getAccessoriesStorage(), startDelay, _controller));
         }
     }
     public void setDelay(int delay) {

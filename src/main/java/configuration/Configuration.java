@@ -15,6 +15,7 @@ public class Configuration {
     private int suppliersNumber;
     private int dealersNumber;
     private int workersNumber;
+    private boolean logStatus;
 
     public Configuration(String _configFile) throws IOException {
         configFile = _configFile;
@@ -35,6 +36,7 @@ public class Configuration {
         suppliersNumber = Integer.parseInt(properties.getProperty("suppliers"));
         dealersNumber = Integer.parseInt(properties.getProperty("dealers"));
         workersNumber = Integer.parseInt(properties.getProperty("workers"));
+        logStatus = Boolean.parseBoolean(properties.getProperty("log"));
     }
 
     public int getStartDelay() { return startDelay; }
@@ -57,4 +59,5 @@ public class Configuration {
     public int getWorkersNumber() {
         return workersNumber;
     }
+    public boolean getLogStatus() { return logStatus; }
 }

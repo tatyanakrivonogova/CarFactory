@@ -21,7 +21,7 @@ public class ThreadPool {
     public ThreadPool(String name, int numberOfThreads) {
         availableThreads = new HashSet<>();
         for (int i = 0; i < numberOfThreads; ++i) {
-            availableThreads.add(new PooledThread(name, requestsQueue));
+            availableThreads.add(new PooledThread(name, i, requestsQueue));
         }
         for (PooledThread availableThread : availableThreads) {
             availableThread.start();

@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 public class Workers {
     private final ArrayList<Worker> workers;
-    public Workers(int numberOfWorkers, CommonStorage commonStorage, ComponentController<Car> readyCarController) {
+    public Workers(int numberOfWorkers, int startDelay, CommonStorage commonStorage, ComponentController<Car> readyCarController) {
         workers = new ArrayList<>();
         InventoryManager carInventoryManager = new InventoryManager();
         for (int i = 0; i < numberOfWorkers;++i) {
-            workers.add(new Worker(carInventoryManager, commonStorage, 5000, readyCarController));
+            workers.add(new Worker(carInventoryManager, commonStorage, startDelay, readyCarController));
         }
     }
     public void setDelay(int delay) {

@@ -7,8 +7,8 @@ import java.util.Queue;
 public class PooledThread extends Thread {
     private final Queue<Task> taskQueue;
 
-    public PooledThread(String name, Queue<Task> _requestsQueue) {
-        super(name);
+    public PooledThread(String name, int index, Queue<Task> _requestsQueue) {
+        super(name + " " + index);
         taskQueue = _requestsQueue;
     }
     public void run() {
@@ -20,7 +20,6 @@ public class PooledThread extends Thread {
                         taskQueue.wait();
                     }
                     catch (InterruptedException e) {
-                        System.out.println("----------------------------------------------");
                         Thread.currentThread().interrupt();
                     }
                 }

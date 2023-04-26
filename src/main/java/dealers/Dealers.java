@@ -8,10 +8,10 @@ import org.apache.log4j.Logger;
 
 public class Dealers {
     private final ArrayList<Dealer> dealers;
-    public Dealers(int numberOfDealers, CommonStorage commonStorage, SoldCarController soldCarController, Logger logger) {
+    public Dealers(int numberOfDealers, int startDelay, CommonStorage commonStorage, SoldCarController soldCarController, Logger logger) {
         dealers = new ArrayList<>();
         for (int i = 0; i < numberOfDealers;++i) {
-            dealers.add(new Dealer(i+1, commonStorage.getCarStorage(), 5000, soldCarController, logger));
+            dealers.add(new Dealer(i+1, commonStorage.getCarStorage(), startDelay, soldCarController, logger));
         }
     }
     public void setDelay(int delay) {
