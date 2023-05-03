@@ -66,7 +66,6 @@ public class Main {
             engineSuppliersPool.addRequest(request);
         }
 
-
         AccessoriesSuppliersRequests accessoriesSuppliersRequests = new AccessoriesSuppliersRequests(accessoriesSuppliers);
         ThreadPool accessoriesSuppliersPool = new ThreadPool("accessories supplier", configuration.getSuppliersNumber());
         for (Task request : accessoriesSuppliersRequests.getAccessoriesSuppliersRequests()) {
